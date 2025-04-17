@@ -14,14 +14,26 @@ const Index = () => {
 
   useEffect(() => {
     // Get featured event
-    const featured = eventsData.find(event => event.featured && event.status === "upcoming");
-    setFeaturedEvent(featured || null);
+    const featured = eventsData.find(
+      event => event.featured && event.status === "upcoming"
+    );
+    
+    if (featured) {
+      // Type assertion to ensure status is treated as the expected union type
+      setFeaturedEvent(featured as Event);
+    } else {
+      setFeaturedEvent(null);
+    }
 
     // Get upcoming events (excluding featured one)
     const upcoming = eventsData
-      .filter(event => event.status === "upcoming" && (!featured || event.id !== featured.id))
+      .filter(
+        event => event.status === "upcoming" && (!featured || event.id !== featured.id)
+      )
       .slice(0, 3);
-    setUpcomingEvents(upcoming);
+      
+    // Type assertion to ensure each event in the array conforms to Event type
+    setUpcomingEvents(upcoming as Event[]);
   }, []);
 
   return (

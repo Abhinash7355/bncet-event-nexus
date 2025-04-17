@@ -1,9 +1,11 @@
 
+import { Event } from "@/types/events";
+
 // Mock data for the BNCET Events Hub
 // In a real application, this would be stored in a database
 
 // Event Data
-export const eventsData = [
+export const eventsData: Event[] = [
   {
     id: "creators-day-2025",
     title: "Creator's Day",
@@ -13,7 +15,7 @@ export const eventsData = [
     description: "Join us for a celebration of creativity and innovation. This event showcases student projects, startups, and creative works across various engineering domains.",
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     featured: true,
-    status: "upcoming",
+    status: "upcoming" as "upcoming", // Explicit type assertion
     organizer: "BNCET Technical Club",
     registrationUrl: "https://forms.google.com/creators-day-registration",
     longDescription: `
@@ -97,7 +99,7 @@ export const eventsData = [
     description: "The annual technical festival of BNCET featuring competitions, workshops, and technical exhibitions across various engineering domains.",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
     featured: true,
-    status: "upcoming",
+    status: "upcoming" as "upcoming", // Explicit type assertion
     organizer: "Student Technical Council",
     registrationUrl: "https://forms.google.com/technovate-registration",
   },
@@ -109,7 +111,7 @@ export const eventsData = [
     location: "Seminar Hall",
     description: "A hands-on workshop by industry experts focusing on bridging the gap between academic knowledge and industry requirements.",
     image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    status: "upcoming",
+    status: "upcoming" as "upcoming", // Explicit type assertion
     organizer: "Training & Placement Cell",
     registrationUrl: "https://forms.google.com/industry-workshop-registration",
   },
@@ -121,7 +123,7 @@ export const eventsData = [
     location: "BNCET Lawn",
     description: "Annual alumni gathering to reconnect with the alma mater and network with current students and fellow alumni.",
     image: "https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    status: "upcoming",
+    status: "upcoming" as "upcoming", // Explicit type assertion
     organizer: "Alumni Association",
     registrationUrl: "https://forms.google.com/alumni-meetup-registration",
   },
@@ -133,7 +135,7 @@ export const eventsData = [
     location: "Computer Center",
     description: "24-hour coding competition challenging participants to build innovative solutions for real-world problems.",
     image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    status: "upcoming",
+    status: "upcoming" as "upcoming", // Explicit type assertion
     organizer: "Coding Club",
     registrationUrl: "https://forms.google.com/hackathon-registration",
   },
@@ -145,8 +147,9 @@ export const eventsData = [
     location: "BNCET Campus",
     description: "Annual cultural festival featuring music, dance, drama, and various artistic performances by talented students.",
     image: "https://images.unsplash.com/photo-1496024840928-4c417adf211d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    status: "past",
+    status: "past" as "past", // Explicit type assertion
     organizer: "Cultural Committee",
+    registrationUrl: "",
   },
   {
     id: "sports-week-2024",
@@ -156,8 +159,9 @@ export const eventsData = [
     location: "BNCET Sports Complex",
     description: "Week-long sports event featuring competitions in cricket, football, basketball, athletics, and other sports.",
     image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    status: "past",
+    status: "past" as "past", // Explicit type assertion
     organizer: "Sports Committee",
+    registrationUrl: "",
   }
 ];
 

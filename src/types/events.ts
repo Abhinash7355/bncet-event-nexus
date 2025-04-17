@@ -14,6 +14,11 @@ export interface Event {
   tags?: string[];
   organizer?: string;
   speakers?: Speaker[];
+  // Additional fields from your data
+  longDescription?: string;
+  highlights?: string[];
+  whoShouldAttend?: string;
+  schedule?: EventScheduleItem[];
 }
 
 export interface Speaker {
@@ -22,4 +27,12 @@ export interface Speaker {
   role: string;
   image?: string;
   bio?: string;
+  title?: string; // Add title as it appears in your data
+}
+
+export interface EventScheduleItem {
+  time: string;
+  title: string;
+  description: string;
+  speaker?: string;
 }
