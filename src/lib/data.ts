@@ -1,4 +1,3 @@
-
 import { Event } from "@/types/events";
 
 // Mock data for the BNCET Events Hub
@@ -71,20 +70,26 @@ export const eventsData: Event[] = [
     ],
     speakers: [
       {
+        id: "1", // Add a unique identifier
         name: "Dr. Rajesh Kumar",
         title: "CTO, TechFusion",
+        role: "Guest Speaker", // Add the required role property
         bio: "Dr. Kumar has over 20 years of experience in technology innovation and has mentored numerous successful startups.",
         image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       },
       {
+        id: "2", // Add a unique identifier
         name: "Er. Priya Sharma",
         title: "BNCET Alumna & Founder of EcoSolutions",
+        role: "Industry Expert", // Add the required role property
         bio: "Ms. Sharma graduated from BNCET in 2015 and has since built a successful clean-tech startup.",
         image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       },
       {
+        id: "3", // Add a unique identifier
         name: "Mr. Vikram Singh",
         title: "Senior Engineer, Google",
+        role: "Technical Advisor", // Add the required role property
         bio: "Mr. Singh specializes in AI and machine learning applications.",
         image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
       }
