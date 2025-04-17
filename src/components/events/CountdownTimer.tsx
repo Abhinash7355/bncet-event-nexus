@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface CountdownTimerProps {
   targetDate: Date;
@@ -19,6 +19,8 @@ const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
     minutes: 0,
     seconds: 0
   });
+  
+  const timerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
@@ -50,12 +52,25 @@ const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
+    // Initialize animation if GSAP is available
+    if (window.gsap && timerRef.current) {
+      window.gsap.to(timerRef.current, {
+        rotationY: 360,
+        duration: 20,
+        repeat: -1,
+        ease: "none"
+      });
+    }
+
     // Clear interval on component unmount
     return () => clearInterval(timer);
   }, [targetDate]);
 
   return (
-    <div className="flex space-x-3 text-white">
+    <div 
+      ref={timerRef}
+      className="flex space-x-3 text-white transform-gpu"
+    >
       <TimeUnit value={timeLeft.days} label="Days" />
       <TimeUnit value={timeLeft.hours} label="Hours" />
       <TimeUnit value={timeLeft.minutes} label="Mins" />
@@ -71,11 +86,19 @@ interface TimeUnitProps {
 
 const TimeUnit = ({ value, label }: TimeUnitProps) => (
   <div className="flex flex-col items-center">
-    <div className="bg-black/40 backdrop-blur-sm w-14 h-14 flex items-center justify-center rounded-md mb-1">
-      <span className="text-xl font-bold">{value.toString().padStart(2, '0')}</span>
+    <div className="bg-black/40 backdrop-blur-lg w-16 h-16 flex items-center justify-center rounded-md mb-1 shadow-[0_0_15px_rgba(14,165,233,0.3)] transition-all duration-300 hover:shadow-[0_0_20px_rgba(14,165,233,0.5)]">
+      <span className="text-2xl font-bold animate-pulse-soft">{value.toString().padStart(2, '0')}</span>
     </div>
-    <span className="text-xs">{label}</span>
+    <span className="text-xs font-medium">{label}</span>
   </div>
 );
 
 export default CountdownTimer;
+
+// Add TypeScript declarations for GSAP
+declare global {
+  interface Window {
+    gsap?: any;
+    ScrollTrigger?: any;
+  }
+}
