@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { X, ExternalLink, Play } from "lucide-react";
+import { X, ExternalLink } from "lucide-react";
 import { galleryData } from "@/lib/data";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -29,7 +29,7 @@ const Gallery = () => {
           Event <span className="text-bncet-blue">Gallery</span>
         </h1>
         <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-          Explore photos and videos from past events at B.N. College of Engineering and Technology, Lucknow.
+          Explore photos from past events at B.N. College of Engineering and Technology, Lucknow.
         </p>
         
         <Tabs 
@@ -71,41 +71,6 @@ const Gallery = () => {
                   {item.date && <p className="text-white/80 text-xs">{item.date}</p>}
                 </div>
               )}
-            </div>
-          ))}
-        </div>
-        
-        {/* Video Gallery */}
-        <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-6">
-          Event Videos
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {galleryData.videos.map((video, index) => (
-            <div key={index} className="rounded-lg overflow-hidden shadow-md">
-              <div className="relative aspect-video bg-gray-100">
-                {/* In a real app, you might use an iframe for YouTube or a video player */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img 
-                    src={video.thumbnail} 
-                    alt={video.title} 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                    <a 
-                      href={video.url} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="h-14 w-14 rounded-full bg-bncet-blue/90 flex items-center justify-center transition-transform hover:scale-110"
-                    >
-                      <Play size={24} className="text-white ml-1" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-900">{video.title}</h3>
-                {video.date && <p className="text-gray-500 text-sm mt-1">{video.date}</p>}
-              </div>
             </div>
           ))}
         </div>
