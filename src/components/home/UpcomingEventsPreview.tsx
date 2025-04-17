@@ -1,9 +1,7 @@
 
-import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
-import { ChevronRight } from "lucide-react";
-import AnimatedEventCard from "./AnimatedEventCard";
+import { ArrowRight, Calendar, ChevronRight, MapPin } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Event } from "@/types/events";
 
 interface UpcomingEventsPreviewProps {
@@ -11,84 +9,65 @@ interface UpcomingEventsPreviewProps {
 }
 
 const UpcomingEventsPreview = ({ events }: UpcomingEventsPreviewProps) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
-  };
-
   return (
-    <section ref={sectionRef} className="py-16 bg-white relative overflow-hidden">
-      {/* Animated background pattern */}
-      <motion.div 
-        className="absolute inset-0 opacity-10 pointer-events-none"
-        style={{
-          backgroundImage: "radial-gradient(circle at 40px 40px, #dbeafe 0, transparent 80px), radial-gradient(circle at 400px 400px, #e0f2fe 0, transparent 80px)",
-          backgroundSize: "600px 600px",
-          backgroundPosition: "0 0",
-        }}
-        animate={{ 
-          backgroundPosition: isInView ? ["0px 0px", "100px 50px", "0px 0px"] : "0px 0px" 
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      />
-
-      <div className="container px-4 sm:px-6 lg:px-8 mx-auto relative z-10">
-        <motion.div
-          className="flex justify-between items-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.5 }}
-        >
+    <section className="py-16 bg-white">
+      <div className="container px-4 sm:px-6 lg:px-8 mx-auto">
+        <div className="flex justify-between items-center mb-10">
           <h2 className="text-3xl font-bold">Upcoming Events</h2>
           <Link
             to="/events"
-            className="flex items-center text-bncet-blue hover:text-bncet-darkBlue font-medium group"
+            className="flex items-center text-bncet-blue hover:text-bncet-darkBlue font-medium"
           >
-            <span>View All</span>
-            <motion.div
-              className="ml-1"
-              initial={{ x: 0 }}
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ChevronRight size={18} />
-            </motion.div>
+            View All
+            <ChevronRight size={18} className="ml-1" />
           </Link>
-        </motion.div>
+        </div>
 
         {events.length > 0 ? (
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {events.map((event, index) => (
-              <AnimatedEventCard 
-                key={event.id} 
-                event={event} 
-                index={index} 
-              />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {events.map((event) => (
+              <Card 
+                key={event.id}
+                className="overflow-hidden transition-shadow hover:shadow-md group"
+              >
+                <CardContent className="p-0">
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={event.image}
+                      alt={event.title}
+                      className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-bncet-blue transition-colors">
+                      {event.title}
+                    </h3>
+                    <div className="flex flex-col space-y-1 mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Calendar size={14} className="mr-2 text-bncet-blue" />
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="flex items-center text-sm text-gray-500">
+                        <MapPin size={14} className="mr-2 text-bncet-blue" />
+                        <span>{event.location}</span>
+                      </div>
+                    </div>
+                    <Link 
+                      to={`/events/${event.id}`}
+                      className="inline-flex items-center text-bncet-blue font-medium hover:underline"
+                    >
+                      View Details
+                      <ArrowRight size={16} className="ml-1" />
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
             ))}
-          </motion.div>
+          </div>
         ) : (
-          <motion.div 
-            className="text-center py-10"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="text-center py-10">
             <p className="text-gray-500">No upcoming events at the moment. Check back soon!</p>
-          </motion.div>
+          </div>
         )}
       </div>
     </section>
