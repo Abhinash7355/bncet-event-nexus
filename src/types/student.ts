@@ -6,3 +6,5 @@ export interface Student {
   branch: string;
   email?: string;
 }
+
+export type Branch = "Computer Science Engineering" | "Electrical Engineering" | "Mechanical Engineering" | "Information Technology" | "Electronics Engineering" | "Civil Engineering" | "Biotechnology";

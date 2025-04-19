@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -110,22 +109,11 @@ const Index = () => {
               Search and download your participation certificate for the "Intrapreneurship in Academia" workshop.
             </p>
             
-            <div className="search-container relative max-w-lg mx-auto mb-4">
-              <Input
-                type="text"
-                placeholder="Search by name or roll number..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-12 h-14 text-lg rounded-full shadow-lg focus:ring-2 focus:ring-bncet-gold"
+            <div className="search-container relative max-w-2xl mx-auto mb-4">
+              <StudentSearch 
+                students={studentData} 
+                onSelect={handleStudentSelect} 
               />
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-              
-              {filteredStudents.length > 0 && (
-                <StudentSearch 
-                  students={filteredStudents} 
-                  onSelect={handleStudentSelect} 
-                />
-              )}
             </div>
           </div>
         </div>
@@ -179,7 +167,7 @@ const Index = () => {
           ) : (
             <div className="text-center py-16 px-4 bg-gray-50 rounded-lg border border-dashed border-gray-300">
               <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                <CheckCircle className="text-gray-400" size={40} />
+                <User className="text-gray-400" size={40} />
               </div>
               <h3 className="text-2xl font-bold text-gray-700 mb-2">No Certificate Selected</h3>
               <p className="text-gray-500 max-w-md mx-auto mb-4">
